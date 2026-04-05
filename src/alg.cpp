@@ -17,7 +17,7 @@ int countPairs2(int *arr, int len, int value) {
   while (posLeft < posRight) {
     int num = arr[posLeft] + arr[posRight];
     if (num == value) {
-      if(arr[posLeft] == arr[posRight]) {
+      if (arr[posLeft] == arr[posRight]) {
         counter += (posRight - posLeft +1) * (posRight - posLeft) / 2;
         break;
       }
@@ -25,11 +25,11 @@ int countPairs2(int *arr, int len, int value) {
       int counterRight = 0;
       int copyLeft = posLeft;
       int copyRight = posRight;
-      while (copyLeft <= copyRight && arr[copyLeft] == arr[posLeft]){
+      while (copyLeft <= copyRight && arr[copyLeft] == arr[posLeft]) {
         counterLeft++;
         copyLeft++;
       }
-      while (copyRight >= posLeft && arr[copyRight] == arr[posRight]){
+      while (copyRight >= posLeft && arr[copyRight] == arr[posRight]) {
         counterRight++;
         copyRight--;
       }
@@ -44,8 +44,8 @@ int countPairs2(int *arr, int len, int value) {
   }
   return counter;
 }
-int bin(int *arr, int left, int right, int num){
-  while (left <= right){
+int bin (int *arr, int left, int right, int num) {
+  while (left <= right) {
     int centr = left + (right - left) / 2;
     if (arr[centr] == num) {
       return centr;
@@ -63,37 +63,8 @@ int countPairs3(int *arr, int len, int value) {
   for (int i = 0; i < len; i++) {
     int num = value - arr[i];
     int poiskNum = bin(arr, i + 1, len - 1, num);
-    if (poiskNum != -1){
-      if (arr[i] == num) {
-        int counterI = 0;
-        int copyI = i;
-        while (copyI < len && arr[copyI] == num) {
-          counterI++;
-          copyI++;
-        }
-        counter += counterI * (counterI -1) / 2;
-        i = copyI -1;
-      } else {
-        int counterRight = 0;
-        int copyPoiskNum = poiskNum;
-        while (copyPoiskNum > i && arr[copyPoiskNum] == num) {
-          counterRight++;
-          copyPoiskNum--;
-        }
-        copyPoiskNum = poiskNum + 1;
-        while (copyPoiskNum < len && arr[copyPoiskNum] == num) {
-          counterRight++;
-          copyPoiskNum++;
-        }
-        int counterLeft = 0;
-        int copyI = i;
-        while (copyI < len && arr[copyI] == arr[i]) {
-          counterLeft++;
-          copyI++;
-        }
-        counter += counterLeft * counterRight;
-        i = copyI - 1;
-      }
+    if (poiskNum != -1) {
+      counter++;
     }
   }
   return counter;
