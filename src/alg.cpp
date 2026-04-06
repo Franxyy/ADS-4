@@ -10,7 +10,7 @@ int countPairs1(int *arr, int len, int value) {
   }
   return counter;
 }
-int countPairs2(int *arr, int len, int value) {
+int countPairs3(int *arr, int len, int value) {
   int counter = 0;
   int posLeft = 0;
   int posRight = len - 1;
@@ -58,13 +58,42 @@ int bin (int *arr, int left, int right, int num) {
   }
   return -1;
 }
-int countPairs3(int *arr, int len, int value) {
+int countPairs2(int *arr, int len, int value) {
   int counter = 0;
   for (int i = 0; i < len; i++) {
     int num = value - arr[i];
     int poiskNum = bin(arr, i + 1, len - 1, num);
     if (poiskNum != -1) {
-      counter++;
+      if (arr[i] == num) {
+        int counterI = 0;
+        int copyI = i;
+        while (copyI < len && arr[copyI] == num) {
+          counterI++;
+          copyI++;
+        }
+        counter += counterI * (counterI -1) / 2;
+        i = copyI -1;
+      } else {
+        int counterRight = 0;
+        int copyPoiskNum = poiskNum;
+        while (copyPoiskNum > i && arr[copyPoiskNum] == num) {
+          counterRight++;
+          copyPoiskNum--;
+        }
+        copyPoiskNum = poiskNum + 1;
+        while (copyPoiskNum < len && arr[copyPoiskNum] == num) {
+          counterRight++;
+          copyPoiskNum++;
+        }
+        int counterLeft = 0;
+        int copyI = i;
+        while (copyI < len && arr[copyI] == arr[i]) {
+          counterLeft++;
+          copyI++;
+        }
+        counter += counterLeft * counterRight;
+        i = copyI - 1;
+      }
     }
   }
   return counter;
