@@ -44,7 +44,7 @@ int countPairs3(int *arr, int len, int value) {
   }
   return counter;
 }
-int bin (int *arr, int left, int right, int num) {
+int bin(int *arr, int left, int right, int num) {
   while (left <= right) {
     int centr = left + (right - left) / 2;
     if (arr[centr] == num) {
